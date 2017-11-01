@@ -16,4 +16,4 @@ class AyyCommand extends Command {
     }
 }
 
-module.exports = AyyCommand;
+// module.exports = AyyCommand;
