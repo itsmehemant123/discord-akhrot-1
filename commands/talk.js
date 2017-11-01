@@ -17,7 +17,7 @@ class TalkCommand extends Command {
         this.triggerBot(message);
       } else {
         var luck = Math.random() * 100;
-        if (luck > 95) {
+        if (luck > 98) {
           logger.info('TRIGERRED BY CHANCE FOR:', message.content)
           this.triggerBot(message);
         }
