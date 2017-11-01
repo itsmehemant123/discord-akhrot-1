@@ -5,6 +5,10 @@
 ```sh
 npm install
 ```
+- While in the `chatterbot` directory, run
+```sh
+pip install -r requirements.txt
+```
 
 ## Running the bot
 
