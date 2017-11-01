@@ -32,7 +32,7 @@ class TalkCommand extends Command {
       };
 
       client.post('http://' + chatterServer.host + ':' + chatterServer.port + '/respond', args, function(data, response) {
-        return message.reply(JSON.parse(data).message).catch(function (err) {
+        return message.channel.send(JSON.parse(data).message).catch(function (err) {
           logger.error('ERROR: ', err)
         });
       });
