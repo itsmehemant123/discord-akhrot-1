@@ -4,7 +4,8 @@ var logger = require('winston');
 class PingCommand extends Command {
     constructor() {
         super('ping', {
-           aliases: ['ping']
+          ownerOnly: true,
+          aliases: ['ping']
         });
     }
 
