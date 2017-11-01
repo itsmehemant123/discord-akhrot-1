@@ -4,7 +4,8 @@ var logger = require('winston');
 class AyyCommand extends Command {
     constructor () {
         super('ayy', {
-            trigger: /ay+/
+          ownerOnly: true,
+          trigger: /ay+/
         });
     }
 
