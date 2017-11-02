@@ -1,6 +1,7 @@
 # Credentials
 *.secret
 auth.json
+dbconfig.json
 
 # sqlite
 db.sqlite3

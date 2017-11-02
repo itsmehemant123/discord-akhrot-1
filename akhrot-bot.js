@@ -18,7 +18,7 @@ const client = new AkairoClient({
   commandDirectory: './commands/',
   // inhibitorDirectory: './inhibitors/',
   listenerDirectory: './listeners/',
-
+  
 }, {
   disableEveryone: true
 });
