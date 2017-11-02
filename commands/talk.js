@@ -11,18 +11,11 @@ class TalkCommand extends Command {
     }
 
     exec(message) {
-      // if (message.content.toLowerCase().indexOf('wheatley') >= 0)
-      // {
-      //   logger.info('TRIGERRED FOR:', message.content)
-      //   this.triggerBot(message);
-      // } else {
-      //   var luck = Math.random() * 100;
-      //   if (luck > 98) {
-      //     logger.info('TRIGERRED BY CHANCE FOR:', message.content)
-      //     this.triggerBot(message);
-      //   }
-      // }
-      this.triggerBot(message);
+      var luck = Math.random() * 100;
+      if (message.content.toLowerCase().indexOf('wheatley') >= 0 || luck > 35) {
+        logger.info('TRIGERRED BY CHANCE FOR:', message.content)
+        this.triggerBot(message);
+      }
     }
 
     triggerBot(message) {
@@ -34,7 +27,7 @@ class TalkCommand extends Command {
 
       client.post('http://' + chatterServer.host + ':' + chatterServer.port + '/respond', args, function(data, response) {
         var payload = JSON.parse(data);
-        if (message.content.toLowerCase().indexOf('wheatley') >= 0 || parseFloat(payload.confidence) > 0.65) {
+        if (parseFloat(payload.confidence) > 0.80) {
           logger.info('SENDING')
           return message.channel.send(payload.message).catch(function (err) {
             logger.error('ERROR: ', err)
