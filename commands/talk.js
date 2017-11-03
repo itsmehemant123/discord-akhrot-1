@@ -13,6 +13,7 @@ class TalkCommand extends Command {
 
     exec(message) {
       if (message.channel.type != 'dm') {
+        message.channel.startTyping();
         var luck = Math.random() * 100;
         var trigerred = message.content.toLowerCase().indexOf('wheatley') >= 0;
         if (trigerred || luck > 35) {
@@ -34,11 +35,13 @@ class TalkCommand extends Command {
           var payload = JSON.parse(data);
           if (trigerred || parseFloat(payload.confidence) > 0.80) {
             logger.info('SENDING')
+            message.channel.stopTyping();
             return message.channel.send(payload.message).catch(function (err) {
               logger.error('ERROR: ', err)
             });
           }
         } catch (e) {
+          message.channel.stopTyping();
           logger.log('ERROR PARSING RECIEVED RESPONSE: ', e)
         }
       });
