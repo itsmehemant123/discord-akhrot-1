@@ -30,12 +30,16 @@ class TalkCommand extends Command {
       };
 
       client.post('http://' + chatterServer.host + ':' + chatterServer.port + '/respond', args, function(data, response) {
-        var payload = JSON.parse(data);
-        if (trigerred || parseFloat(payload.confidence) > 0.80) {
-          logger.info('SENDING')
-          return message.channel.send(payload.message).catch(function (err) {
-            logger.error('ERROR: ', err)
-          });
+        try {
+          var payload = JSON.parse(data);
+          if (trigerred || parseFloat(payload.confidence) > 0.80) {
+            logger.info('SENDING')
+            return message.channel.send(payload.message).catch(function (err) {
+              logger.error('ERROR: ', err)
+            });
+          }
+        } catch (e) {
+          logger.log('ERROR PARSING RECIEVED RESPONSE: ', e)
         }
       });
     }
