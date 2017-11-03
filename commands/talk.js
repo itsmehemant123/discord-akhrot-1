@@ -14,8 +14,9 @@ class TalkCommand extends Command {
     exec(message) {
       logger.info('TRIGE');
       if (message.channel.type != 'dm') {
+        var lowerCaseMsg = message.content.toLowerCase();
         var luck = Math.random() * 100;
-        if (message.content.indexOf('wheatley, do you think') >= 0) {
+        if (lowerCaseMsg.indexOf('wheatley, do you think') >= 0) {
           if (luck > 66) {
             return message.reply('yes bby');
           } else if (luck <= 66 && luck > 33) {
@@ -25,7 +26,7 @@ class TalkCommand extends Command {
           }
         } else {
 
-          var trigerred = message.content.toLowerCase().indexOf('wheatley') >= 0;
+          var trigerred = lowerCaseMsg.indexOf('wheatley') >= 0;
           if (trigerred || luck > 35) {
             logger.info('TRIGERRED FOR:', message.content)
             message.channel.startTyping();
