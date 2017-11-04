@@ -26,11 +26,11 @@ class TalkCommand extends Command {
           }
         } else {
 
-          var trigerred = lowerCaseMsg.indexOf('wheatley') >= 0;
-          if (trigerred || luck > 35) {
+          // var trigerred = lowerCaseMsg.indexOf('wheatley') >= 0;
+          if (luck > 35) {
             logger.info('TRIGERRED FOR:', message.content)
             message.channel.startTyping();
-            this.triggerBot(message, trigerred);
+            this.triggerBot(message, false);
           }
         }
 
@@ -48,7 +48,7 @@ class TalkCommand extends Command {
         try {
           var payload = JSON.parse(data);
           message.channel.stopTyping();
-          if (trigerred || parseFloat(payload.confidence) > 0.80) {
+          if (trigerred || parseFloat(payload.confidence) > 0.70) {
             logger.info('SENDING');
             return message.channel.send(payload.message).catch(function (err) {
               logger.error('ERROR: ', err);
