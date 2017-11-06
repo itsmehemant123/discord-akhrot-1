@@ -52,7 +52,7 @@ class TalkCommand extends Command {
         try {
           var payload = JSON.parse(data);
           message.channel.stopTyping();
-          if (trigerred || parseFloat(payload.confidence) > 0.70) {
+          if (trigerred || parseFloat(payload.confidence) > 0.80) {
             logger.info('SENDING');
             return message.channel.send(payload.message).catch(function (err) {
               logger.error('ERROR: ', err);
