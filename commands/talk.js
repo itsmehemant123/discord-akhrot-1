@@ -39,8 +39,12 @@ class TalkCommand extends Command {
 
     triggerBot(message, trigerred) {
       var client = new Client();
+      var isLearn = false;
+      if (message.channel.name == 'general') {
+        isLearn = true;
+      }
       var args = {
-        data: { message: message.content },
+        data: { message: message.content, should_learn: isLearn },
         headers: { "Content-Type": "application/json" }
       };
 

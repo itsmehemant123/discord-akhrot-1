@@ -37,10 +37,21 @@ def train():
 def get_response():
     content = request.get_json()
     sT = time.time()
-    botResp = chatbot.get_response(content['message'])
-    statement = botResp.text
-    print('CONTENTS: ',botResp)
-    eT = time.time()
-    print('RESPONDING:', statement, ' FOR :', content['message'], ' WITH CONFIDENCE: ', str(botResp.confidence), ' AND TOOK: ', (eT - sT))
-    response_message = "{\"message\": \"" + statement + "\", \"confidence\": \"" + str(botResp.confidence) + "\"}"
-    return jsonify(response_message)
+    botLearn = content['should_learn']
+    if (botLearn):
+        botResp = chatbot.get_response(content['message'])
+        statement = botResp.text
+        print('CONTENTS: ',botResp)
+        eT = time.time()
+        print('RESPONDING:', statement, ' FOR :', content['message'], ' WITH CONFIDENCE: ', str(botResp.confidence), ' AND TOOK: ', (eT - sT))
+        response_message = "{\"message\": \"" + statement + "\", \"confidence\": \"" + str(botResp.confidence) + "\"}"
+        return jsonify(response_message)
+    else:
+        print('NOT LEARNING')
+        inp, botResp = chatbot.generate_response(chatbot.input.process_input_statement(content['message']), chatbot.default_session.uuid)
+        statement = botResp.text
+        print('CONTENTS: ',botResp)
+        eT = time.time()
+        print('RESPONDING:', statement, ' FOR :', content['message'], ' WITH CONFIDENCE: ', str(botResp.confidence), ' AND TOOK: ', (eT - sT))
+        response_message = "{\"message\": \"" + statement + "\", \"confidence\": \"" + str(botResp.confidence) + "\"}"
+        return jsonify(response_message)
