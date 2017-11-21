@@ -1,5 +1,6 @@
 # Discord Bot
 
+**[Unmaintained] use my [discord-wheatley](https://github.com/itsmehemant123/discord-wheatley) for pure python bot**
 ## Setting up
 - While in the root directory, run
 ```sh
